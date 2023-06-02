@@ -2,7 +2,7 @@
   background-color: black;
   color: white;
   max-width: 1280px;
-  margin: 0;
+  margin: 0 auto;
 }
 
 .page__section {
@@ -50,7 +50,7 @@
   line-height: 48px;
   font-weight: 500;
   margin: 0;
-  padding-right: 42px;
+  padding-right: 18px;
   padding-bottom: 7px;
 }
 
@@ -59,6 +59,12 @@
   height: 24px;
   width: 24px;
   border: 1px solid #ffffff;
+  align-self: center;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .profile__description {
@@ -70,7 +76,65 @@
 
 .profile__add-button {
   background: transparent url(../images/add.svg) center no-repeat;
+  border: 2px solid #ffffff;
   height: 50px;
   width: 150px;
   margin-left: auto;
+}
+
+.profile__add-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.cards {
+  margin-top: 72px;
+}
+
+.card__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 282px);
+  grid-gap: 20px 17px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card__image {
+  height: 282px;
+  width: 282px;
+  border-radius: 10px;
+}
+
+.card__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  color: black;
+  padding: 20px 25px;
+  border-radius: 10px;
+}
+
+.card__title {
+  margin: 0;
+}
+
+.card__like-button {
+  background: transparent url(../images/heart.svg) center no-repeat;
+  height: 18px;
+  width: 21px;
+  color: black;
+  border: none;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
