@@ -33,3 +33,6 @@ Good luck and have fun!
 **Plans to improve this project**
 
 I want to improve this project by allowing users to add and edit photos. I would like to incoprate some basic Javascript into this project to improve the overall UI of this website.
+
+**Link to my project**
+https://amzn-matt.github.io/se_project_aroundtheus
