@@ -22,8 +22,8 @@
   border-radius: 10px;
   box-sizing: border-box;
   max-width: 430px;
-  max-height: 330px;
-  padding: 32px 36px 36px;
+  height: 330px;
+  padding: 34px 36px 36px;
 }
 
 .modal__close {
@@ -36,7 +36,7 @@
   padding: 0;
   border: none;
   transition: opacity 0.4s ease;
-  /* transform: rotate(45deg); */
+  /* transform: rotate(-45deg); */
 }
 
 .modal__close:hover {
@@ -63,6 +63,7 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 1.2;
+  color: #000;
   outline: none;
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -83,7 +84,6 @@
   border-radius: 2px;
   border: none;
   padding: 0;
-  align-self: center;
   transition: opacity 0.3s linear;
 }
 
@@ -94,7 +94,7 @@
 
 @media screen and (max-width: 635px) {
   .modal__container {
-    width: 282px;
+    max-width: 282px;
     height: 322px;
     padding: 25px 22px 25px 22px;
   }
