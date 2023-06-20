@@ -56,7 +56,7 @@ function handleProfileFormSubmit(evt) {
 
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  profileModal.classList.remove("modal_opened");
+  closePopup();
 }
 
 function getCardElement(data) {
