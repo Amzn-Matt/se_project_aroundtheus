@@ -8,10 +8,15 @@
   right: 0;
   align-items: center;
   justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.5s linear;
 }
 
 .modal_opened {
   display: flex;
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal__container {
@@ -97,6 +102,29 @@
 .modal__form-button:hover {
   opacity: 0.8;
   cursor: pointer;
+}
+
+.modal__preview-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 433px;
+  max-height: 540px;
+}
+
+.modal__image-preview {
+  max-height: 75vh;
+  max-width: 75vw;
+  width: 100%;
+}
+
+.modal__image-title {
+  color: #fff;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 10px 0 0 0;
 }
 
 @media screen and (max-width: 635px) {
