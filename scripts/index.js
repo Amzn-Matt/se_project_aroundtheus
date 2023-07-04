@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -67,6 +67,16 @@ function closePopup(modal) {
   modal.classList.remove("modal_opened");
 }
 
+function fillProfileForm() {
+  profileTitleInput.value = profileTitle.textContent;
+  profileDescriptionInput.value = profileDescription.textContent;
+}
+
+function openEditProfileForm() {
+  fillProfileForm();
+  openPopup(profileModal);
+}
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
@@ -82,6 +92,8 @@ function handleNewCardSubmit(evt) {
   const link = cardUrlInput.value;
   renderCard({ name, link });
   closePopup(addNewCardModal);
+
+  addCardModalForm.reset();
 }
 
 function getCardElement(data) {
@@ -124,12 +136,7 @@ initialCards.forEach((data) => {
 });
 
 //Event Listeners
-profileEditBtn.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-
-  openPopup(profileModal);
-});
+profileEditBtn.addEventListener("click", openEditProfileForm);
 
 profileModalCloseBtn.addEventListener("click", () => closePopup(profileModal));
 
