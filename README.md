@@ -29,6 +29,7 @@ Good luck and have fun!
 - Flat BEM
 - Grid layout
 - Responsive design
+- Basic JavaScript
 
 **Plans to improve this project**
 
