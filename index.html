@@ -64,6 +64,7 @@
             id="name"
             name="title"
             placeholder="Name"
+            required
           />
           <input
             class="modal__form-input"
@@ -71,6 +72,7 @@
             id="description"
             name="description"
             placeholder="About Me"
+            required
           />
           <button type="submit" class="modal__form-button">Save</button>
         </form>
@@ -88,13 +90,15 @@
             id="title"
             name="title"
             placeholder="Title"
+            required
           />
           <input
             class="modal__form-input"
-            type="text"
+            type="url"
             id="url"
             name="description"
             placeholder="Image link"
+            required
           />
           <button type="submit" class="modal__form-button">Create</button>
         </form>
@@ -109,6 +113,6 @@
       </div>
     </div>
 
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" defer></script>
   </body>
 </html>
