@@ -36,8 +36,10 @@ const profileEditBtn = document.querySelector(".profile__edit-button");
 const profileModalCloseBtn = profileModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
-const profileTitleInput = document.querySelector("#name");
-const profileDescriptionInput = document.querySelector("#description");
+const profileTitleInput = document.querySelector("#profile-title-input");
+const profileDescriptionInput = document.querySelector(
+  "#profile-description-input"
+);
 const profileModalForm = profileModal.querySelector("#profile-edit-form");
 
 //Add Card Variables
@@ -45,8 +47,8 @@ const addNewCardBtn = document.querySelector(".profile__add-button");
 const addNewCardModal = document.querySelector("#add-modal");
 const addNewCardModalCloseBtn = addNewCardModal.querySelector(".modal__close");
 const addCardModalForm = addNewCardModal.querySelector("#add-card-form");
-const cardTitleInput = addCardModalForm.querySelector("#title");
-const cardUrlInput = addCardModalForm.querySelector("#url");
+const cardTitleInput = addCardModalForm.querySelector("#add-card-title-input");
+const cardUrlInput = addCardModalForm.querySelector("#add-card-url-input");
 
 //Card DOM Template
 const cardTemplate = document.querySelector("#card-template").content;
