@@ -49,6 +49,7 @@ const addNewCardModalCloseBtn = addNewCardModal.querySelector(".modal__close");
 const addCardModalForm = addNewCardModal.querySelector("#add-card-form");
 const cardTitleInput = addCardModalForm.querySelector("#add-card-title-input");
 const cardUrlInput = addCardModalForm.querySelector("#add-card-url-input");
+const submitButton = addNewCardModal.querySelector(".modal__form-button");
 
 //Card DOM Template
 const cardTemplate = document.querySelector("#card-template").content;
@@ -60,6 +61,16 @@ const imgPreview = previewModal.querySelector(".modal__image-preview");
 const imgPreviewTitle = previewModal.querySelector(".modal__image-title");
 const imgCloseBtn = previewModal.querySelector(".modal__close");
 
+// Validation Config
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__form-button",
+  inactiveButtonClass: "modal__form-button_disabled",
+  inputErrorClass: "modal__form-input_type_error",
+  errorClass: "modal__error_visible",
+};
+
 //Functions
 function openPopup(modal) {
   modal.classList.add("modal_opened");
@@ -69,6 +80,7 @@ function openPopup(modal) {
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", escKeyHandler);
+  addCardModalForm.reset();
 }
 
 function fillProfileForm() {
@@ -79,6 +91,12 @@ function fillProfileForm() {
 function openEditProfileForm() {
   fillProfileForm();
   openPopup(profileModal);
+}
+
+function openAddNewCardModal() {
+  disableSubmitBtn(submitButton, config);
+
+  openPopup(addNewCardModal);
 }
 
 function handleProfileFormSubmit(evt) {
@@ -97,7 +115,7 @@ function handleNewCardSubmit(evt) {
   renderCard({ name, link });
   closePopup(addNewCardModal);
 
-  addCardModalForm.reset();
+  disableSubmitBtn(submitButton, config);
 }
 
 function escKeyHandler(evt) {
@@ -178,7 +196,7 @@ profileEditBtn.addEventListener("click", openEditProfileForm);
 
 profileModalCloseBtn.addEventListener("click", () => closePopup(profileModal));
 
-addNewCardBtn.addEventListener("click", () => openPopup(addNewCardModal));
+addNewCardBtn.addEventListener("click", openAddNewCardModal);
 
 addNewCardModalCloseBtn.addEventListener("click", () =>
   closePopup(addNewCardModal)
