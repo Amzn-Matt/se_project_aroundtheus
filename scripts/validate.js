@@ -53,7 +53,7 @@ function toggleButtonState(inputList, submitButton, { inactiveButtonClass }) {
 function setEventlisteners(formElement, options) {
   const { inputSelector } = options;
   const inputList = Array.from(formElement.querySelectorAll(inputSelector));
-  const submitButton = formElement.querySelector(".modal__form-button");
+  const submitButton = formElement.querySelector(options.submitButtonSelector);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", function () {
