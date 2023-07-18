@@ -74,13 +74,14 @@ const config = {
 //Functions
 function openPopup(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", escKeyHandler);
+  modal.addEventListener("mousedown", closeModalOnRemoteClick);
+  document.addEventListener("keydown", handleEscKeydown);
 }
 
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", escKeyHandler);
-  addCardModalForm.reset();
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+  document.removeEventListener("keydown", handleEscKeydown);
 }
 
 function fillProfileForm() {
@@ -94,6 +95,7 @@ function openEditProfileForm() {
 }
 
 function openAddNewCardModal() {
+  addCardModalForm.reset();
   disableSubmitBtn(submitButton, config);
 
   openPopup(addNewCardModal);
@@ -114,14 +116,21 @@ function handleNewCardSubmit(evt) {
   const link = cardUrlInput.value;
   renderCard({ name, link });
   closePopup(addNewCardModal);
-
-  disableSubmitBtn(submitButton, config);
 }
 
-function escKeyHandler(evt) {
+function handleEscKeydown(evt) {
   if (evt.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
     closePopup(openedModal);
+  }
+}
+
+function closeModalOnRemoteClick(evt) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal_close")
+  ) {
+    closePopup(evt.target);
   }
 }
 
@@ -165,33 +174,6 @@ initialCards.forEach((data) => {
 });
 
 //Event Listeners
-profileModal.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal_close")
-  ) {
-    closePopup(profileModal);
-  }
-});
-
-addNewCardModal.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal_close")
-  ) {
-    closePopup(addNewCardModal);
-  }
-});
-
-previewModal.addEventListener("mousedown", (evt) => {
-  if (
-    evt.target.classList.contains("modal") ||
-    evt.target.classList.contains("modal_close")
-  ) {
-    closePopup(previewModal);
-  }
-});
-
 profileEditBtn.addEventListener("click", openEditProfileForm);
 
 profileModalCloseBtn.addEventListener("click", () => closePopup(profileModal));
