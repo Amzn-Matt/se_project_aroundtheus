@@ -1,3 +1,5 @@
+import Card from "../components/Card.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -134,38 +136,38 @@ function closeModalOnRemoteClick(evt) {
   }
 }
 
-function getCardElement(data) {
-  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-  const cardLikeBtn = cardElement.querySelector(".card__like-button");
-  const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
+// function getCardElement(data) {
+//   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
+//   const cardImageElement = cardElement.querySelector(".card__image");
+//   const cardTitleElement = cardElement.querySelector(".card__title");
+//   const cardLikeBtn = cardElement.querySelector(".card__like-button");
+//   const cardDeleteBtn = cardElement.querySelector(".card__delete-button");
 
-  cardLikeBtn.addEventListener("click", () => {
-    cardLikeBtn.classList.toggle("card__like-button_active");
-  });
+//   cardLikeBtn.addEventListener("click", () => {
+//     cardLikeBtn.classList.toggle("card__like-button_active");
+//   });
 
-  cardDeleteBtn.addEventListener("click", () => {
-    cardElement.remove();
-  });
+//   cardDeleteBtn.addEventListener("click", () => {
+//     cardElement.remove();
+//   });
 
-  cardImageElement.addEventListener("click", () => {
-    imgPreview.src = data.link;
-    imgPreview.alt = data.name;
-    imgPreviewTitle.textContent = data.name;
-    openPopup(previewModal);
-  });
+//   cardImageElement.addEventListener("click", () => {
+//     imgPreview.src = data.link;
+//     imgPreview.alt = data.name;
+//     imgPreviewTitle.textContent = data.name;
+//     openPopup(previewModal);
+//   });
 
-  cardTitleElement.textContent = data.name;
-  cardImageElement.alt = data.name;
-  cardImageElement.src = data.link;
+//   cardTitleElement.textContent = data.name;
+//   cardImageElement.alt = data.name;
+//   cardImageElement.src = data.link;
 
-  return cardElement;
-}
+//   return cardElement;
+// }
 
 function renderCard(data) {
-  const cardElement = getCardElement(data);
-  cardListElement.prepend(cardElement);
+  const cardElement = new Card(data, "#card-template");
+  cardListElement.prepend(cardElement.generateCard());
 }
 
 //Loops
@@ -189,3 +191,5 @@ imgCloseBtn.addEventListener("click", () => closePopup(previewModal));
 profileModalForm.addEventListener("submit", handleProfileFormSubmit);
 
 addCardModalForm.addEventListener("submit", handleNewCardSubmit);
+
+export { openPopup };
