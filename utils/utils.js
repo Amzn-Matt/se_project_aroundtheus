@@ -4,4 +4,26 @@ function openPopup(modal) {
   document.addEventListener("keydown", handleEscKeydown);
 }
 
-export { openPopup };
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  modal.removeEventListener("mousedown", closeModalOnRemoteClick);
+  document.removeEventListener("keydown", handleEscKeydown);
+}
+
+function handleEscKeydown(evt) {
+  if (evt.key === "Escape") {
+    const openedModal = document.querySelector(".modal_opened");
+    closePopup(openedModal);
+  }
+}
+
+function closeModalOnRemoteClick(evt) {
+  if (
+    evt.target === evt.currentTarget ||
+    evt.target.classList.contains("modal_close")
+  ) {
+    closePopup(evt.target);
+  }
+}
+
+export { openPopup, closePopup };
