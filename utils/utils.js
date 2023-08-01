@@ -20,9 +20,9 @@ function handleEscKeydown(evt) {
 function closeModalOnRemoteClick(evt) {
   if (
     evt.target === evt.currentTarget ||
-    evt.target.classList.contains("modal_close")
+    evt.target.classList.contains("modal__close")
   ) {
-    closePopup(evt.target);
+    closePopup(evt.currentTarget);
   }
 }
 
