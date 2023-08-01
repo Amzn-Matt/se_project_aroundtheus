@@ -4,7 +4,15 @@ export default class Card {
   constructor(data, cardSelector) {
     this._name = data.name;
     this._link = data.link;
-    this._cardSlector = cardSelector;
+    this._cardSelector = cardSelector;
+
+    this._previewModal = document.querySelector("#preview-modal");
+    this._imgPreview = this._previewModal.querySelector(
+      ".modal__image-preview"
+    );
+    this._imgPreviewTitle = this._previewModal.querySelector(
+      ".modal__image-title"
+    );
   }
 
   _setEventListeners() {
@@ -22,9 +30,7 @@ export default class Card {
   }
 
   _handleLikeBtn() {
-    this._cardElement
-      .querySelector(".card__like-button")
-      .classList.toggle("card__like-button_active");
+    this._likeButton.classList.toggle("card__like-button_active");
   }
 
   _handleDeleteBtn() {
@@ -40,21 +46,13 @@ export default class Card {
 
   generateCard() {
     this._cardElement = document
-      .querySelector("#card-template")
+      .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
 
     this._likeButton = this._cardElement.querySelector(".card__like-button");
     this._deleteButton = this._cardElement.querySelector(
       ".card__delete-button"
-    );
-
-    this._previewModal = document.querySelector("#preview-modal");
-    this._imgPreview = this._previewModal.querySelector(
-      ".modal__image-preview"
-    );
-    this._imgPreviewTitle = this._previewModal.querySelector(
-      ".modal__image-title"
     );
 
     this._cardImageElement = this._cardElement.querySelector(".card__image");
