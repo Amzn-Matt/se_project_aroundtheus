@@ -1,6 +1,7 @@
 import Card from "../components/Card.js";
 import { openPopup, closePopup } from "../utils/utils.js";
 import FormValidator from "../components/FormValidator.js";
+import Section from "../components/Section.js";
 
 const initialCards = [
   {
@@ -103,13 +104,26 @@ function createCard(data) {
   return cardElement.generateCard();
 }
 
-function renderCard(data) {
-  const cardElement = createCard(data);
-  cardListElement.prepend(cardElement);
-}
+const section = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      const cardElement = createCard(data);
+      section.addItem(cardElement);
+    },
+  },
+  cardListElement
+);
 
-//Loops
-initialCards.forEach(renderCard);
+section.renderItems();
+
+// function renderCard(data) {
+//   const cardElement = createCard(data);
+//   cardListElement.prepend(cardElement);
+// }
+
+// //Loops
+// initialCards.forEach(renderCard);
 
 //Event Listeners
 profileEditBtn.addEventListener("click", openEditProfileForm);
