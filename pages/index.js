@@ -1,7 +1,8 @@
 import Card from "../components/Card.js";
-import { openPopup, closePopup } from "../utils/utils.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 
 const initialCards = [
   {
@@ -64,21 +65,37 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
+const userInfo = new UserInfo({
+  nameSelector: ".profile__title",
+  jobSelector: ".profile__description",
+});
+
+const profileEditPopup = new PopupWithForm(
+  "#edit-modal",
+  handleProfileFormSubmit
+);
+profileEditPopup.setEventListeners();
+
+const addCardPopup = new PopupWithForm("#add-modal", handleProfileFormSubmit);
+addCardPopup.setEventListeners();
+
 //Functions
-function fillProfileForm() {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-}
+// function fillProfileForm() {
+//   profileTitleInput.value = profileTitle.textContent;
+//   profileDescriptionInput.value = profileDescription.textContent;
+// }
 
 function openEditProfileForm() {
-  fillProfileForm();
+  const user = userInfo.getUserInfo();
+  profileTitleInput.value = user.userName;
+  profileDescriptionInput.value = user.userJob;
   profileFormValidator.resetValidation();
-  openPopup(profileModal);
+  profileEditPopup.open();
 }
 
 function openAddNewCardModal() {
   addCardFormValidator.resetValidation();
-  openPopup(addNewCardModal);
+  addCardPopup.open();
 }
 
 function handleProfileFormSubmit(evt) {
