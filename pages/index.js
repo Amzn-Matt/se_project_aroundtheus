@@ -2,6 +2,7 @@ import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 
 const initialCards = [
@@ -79,6 +80,9 @@ profileEditPopup.setEventListeners();
 const addCardPopup = new PopupWithForm("#add-modal", handleProfileFormSubmit);
 addCardPopup.setEventListeners();
 
+const cardPreviewPopup = new PopupWithImage("#preview-modal");
+cardPreviewPopup.setEventListeners();
+
 //Functions
 // function fillProfileForm() {
 //   profileTitleInput.value = profileTitle.textContent;
@@ -117,8 +121,12 @@ function handleNewCardSubmit(evt) {
 }
 
 function createCard(data) {
-  const cardElement = new Card(data, "#card-template");
+  const cardElement = new Card(data, "#card-template", handleCardClick);
   return cardElement.generateCard();
+
+  function handleCardClick(data) {
+    cardPreviewPopup.open(data);
+  }
 }
 
 const section = new Section(
