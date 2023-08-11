@@ -1,10 +1,9 @@
-import { openPopup } from "../utils/utils.js";
-
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleCardClick = handleCardClick;
 
     this._previewModal = document.querySelector("#preview-modal");
     this._imgPreview = this._previewModal.querySelector(
@@ -25,7 +24,7 @@ export default class Card {
     });
 
     this._cardImageElement.addEventListener("click", () => {
-      this._handleCardPreview();
+      this._handleCardClick(this._name, this._link);
     });
   }
 
@@ -37,12 +36,11 @@ export default class Card {
     this._cardElement.remove();
   }
 
-  _handleCardPreview() {
-    this._imgPreview.src = this._link;
-    this._imgPreview.alt = this._link;
-    this._imgPreviewTitle.textContent = this._name;
-    openPopup(this._previewModal);
-  }
+  // _handleCardClick() {
+  //   this._imgPreview.src = this._link;
+  //   this._imgPreview.alt = this._link;
+  //   this._imgPreviewTitle.textContent = this._name;
+  // }
 
   generateCard() {
     this._cardElement = document
