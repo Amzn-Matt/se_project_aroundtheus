@@ -10,18 +10,21 @@
       content="Travel, United States, Yosemite, Latemar, Bald Mountains, Lago di Braies, Vanoise National Park"
     />
     <title>A Trip Around the US</title>
-    <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
   <body class="page">
     <div class="page__content">
       <header class="header page__section">
-        <img src="./images/logo.svg" alt="Around the U.S logo" class="logo" />
+        <img
+          src="<%=require('./images/logo.svg')%>"
+          alt="Around the U.S logo"
+          class="logo"
+        />
       </header>
       <main class="content">
         <section class="profile page__section">
           <img
-            src="./images/jacques-cousteau.jpg"
+            src="<%=require('./images/jacques-cousteau.jpg')%>"
             alt="Picture of Jacques
           Cousteau"
             class="profile__image"
@@ -135,7 +138,5 @@
         <p class="modal__image-title"></p>
       </div>
     </div>
-
-    <script src="./pages/index.js" type="module"></script>
   </body>
 </html>
