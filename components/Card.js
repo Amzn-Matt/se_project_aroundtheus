@@ -4,14 +4,6 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
-
-    this._previewModal = document.querySelector("#preview-modal");
-    this._imgPreview = this._previewModal.querySelector(
-      ".modal__image-preview"
-    );
-    this._imgPreviewTitle = this._previewModal.querySelector(
-      ".modal__image-title"
-    );
   }
 
   _setEventListeners() {
@@ -24,7 +16,7 @@ export default class Card {
     });
 
     this._cardImageElement.addEventListener("click", () => {
-      this._handleCardClick(this._name, this._link);
+      this._handleCardClick({ name: this._name, link: this._link });
     });
   }
 
@@ -35,12 +27,6 @@ export default class Card {
   _handleDeleteBtn() {
     this._cardElement.remove();
   }
-
-  // _handleCardClick() {
-  //   this._imgPreview.src = this._link;
-  //   this._imgPreview.alt = this._link;
-  //   this._imgPreviewTitle.textContent = this._name;
-  // }
 
   generateCard() {
     this._cardElement = document
