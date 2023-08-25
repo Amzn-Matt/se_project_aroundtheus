@@ -7,13 +7,14 @@ import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import Api from "../components/Api.js";
 import {
-  initialCards,
+  // initialCards,
   profileEditBtn,
   profileTitleInput,
   profileDescriptionInput,
   addNewCardBtn,
   cardListElement,
   config,
+  initialCards,
 } from "../utils/constants.js";
 
 const api = new Api({
@@ -24,19 +25,39 @@ const api = new Api({
   },
 });
 
-//Card Section
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const cardElement = createCard(data);
-      section.addItem(cardElement);
-    },
-  },
-  cardListElement
-);
+api
+  .getInitialCards()
+  .then((initialCards) => {
+    const section = new Section(
+      {
+        items: initialCards,
+        renderer: (data) => {
+          const cardElement = createCard(data);
+          section.addItem(cardElement);
+        },
+      },
+      cardListElement
+    );
 
-section.renderItems();
+    section.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+//Card Section
+// const section = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (data) => {
+//       const cardElement = createCard(data);
+//       section.addItem(cardElement);
+//     },
+//   },
+//   cardListElement
+// );
+
+// section.renderItems();
 
 //Profile Form
 const userInfo = new UserInfo({
@@ -76,11 +97,19 @@ function handleProfileFormSubmit(inputValues) {
   profileEditPopup.close();
 }
 
-function handleNewCardSubmit(inputValues) {
-  const { name, link } = inputValues;
-  const newCardEl = createCard({ name, link });
-  section.addItem(newCardEl);
-  addCardPopup.close();
+let section;
+
+function handleNewCardSubmit({ name, link }) {
+  api
+    .addNewCard({ name, link })
+    .then((data) => {
+      const newCardEl = createCard(data);
+      section.addItem(newCardEl);
+      addCardPopup.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
 function createCard(data) {
