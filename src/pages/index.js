@@ -5,6 +5,7 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
+import Api from "../components/Api.js";
 import {
   initialCards,
   profileEditBtn,
@@ -14,6 +15,14 @@ import {
   cardListElement,
   config,
 } from "../utils/constants.js";
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "3776fe3f-36da-41c3-a268-0c2e1ee7c5f9",
+    "Content-Type": "application/json",
+  },
+});
 
 //Card Section
 const section = new Section(
