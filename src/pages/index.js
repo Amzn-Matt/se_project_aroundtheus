@@ -6,6 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import Api from "../components/Api.js";
+import PopupWithDeleteCard from "../components/PopupWithDeleteCard.js";
 import {
   // initialCards,
   profileEditBtn,
@@ -16,6 +17,9 @@ import {
   config,
   initialCards,
 } from "../utils/constants.js";
+
+let section;
+let userId;
 
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
@@ -28,7 +32,7 @@ const api = new Api({
 api
   .getInitialCards()
   .then((initialCards) => {
-    const section = new Section(
+    section = new Section(
       {
         items: initialCards,
         renderer: (data) => {
@@ -40,6 +44,35 @@ api
     );
 
     section.renderItems();
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+const deleteCardPopup = new PopupWithDeleteCard("#delete-card-modal");
+deleteCardPopup.setEventListeners();
+
+function handleDeleteBtnClick(cardId) {
+  deleteCardPopup.open();
+  deleteCardPopup.setSubmitAction(() => {
+    api
+      .deleteCard(cardId)
+      .then((res) => {
+        this.removeCard(res);
+        deleteCardPopup.close();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+}
+
+api
+  .getUserInfo()
+  .then((userData) => {
+    userId = userData._id;
+    userInfo.setUserInfo(userData);
+    console.log(userData);
   })
   .catch((err) => {
     console.log(err);
@@ -97,13 +130,11 @@ function handleProfileFormSubmit(inputValues) {
   profileEditPopup.close();
 }
 
-let section;
-
 function handleNewCardSubmit({ name, link }) {
   api
     .addNewCard({ name, link })
-    .then((data) => {
-      const newCardEl = createCard(data);
+    .then((res) => {
+      const newCardEl = createCard(res);
       section.addItem(newCardEl);
       addCardPopup.close();
     })
@@ -113,7 +144,12 @@ function handleNewCardSubmit({ name, link }) {
 }
 
 function createCard(data) {
-  const cardElement = new Card(data, "#card-template", handleCardClick);
+  const cardElement = new Card(
+    data,
+    "#card-template",
+    handleCardClick,
+    handleDeleteBtnClick
+  );
   return cardElement.generateCard();
 }
 
