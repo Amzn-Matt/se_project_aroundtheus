@@ -10,7 +10,7 @@
       content="Travel, United States, Yosemite, Latemar, Bald Mountains, Lago di Braies, Vanoise National Park"
     />
     <title>A Trip Around the US</title>
-    <link rel="shortcut icon" href="favicon.ico" />
+    <!-- <link rel="shortcut icon" href="favicon.ico" /> -->
   </head>
   <body class="page">
     <div class="page__content">
@@ -30,9 +30,9 @@
             class="profile__image"
           />
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button class="profile__edit-button" type="button"></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -136,6 +136,16 @@
         <button type="button" class="modal__close"></button>
         <img class="modal__image-preview" src="#" alt="" />
         <p class="modal__image-title"></p>
+      </div>
+    </div>
+
+    <div class="modal" id="delete-card-modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close"></button>
+        <h3 class="modal__heading">Are you sure?</h3>
+        <form class="modal__form" id="delete-card-form" name="delete-form">
+          <button type="submit" class="modal__form-button">Yes</button>
+        </form>
       </div>
     </div>
   </body>
