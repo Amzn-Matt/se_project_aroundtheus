@@ -36,6 +36,7 @@ export const profileTitleInput = document.querySelector("#profile-title-input");
 export const profileDescriptionInput = document.querySelector(
   "#profile-description-input"
 );
+export const avatarEditBtn = document.querySelector(".profile__picture-button");
 
 //Add Card Variables
 export const addNewCardBtn = document.querySelector(".profile__add-button");
