@@ -6,7 +6,6 @@
 
 .profile__picture-container {
   position: relative;
-  margin-right: 24px;
 }
 
 .profile__image {
@@ -114,11 +113,6 @@
 
   .profile__image {
     margin: 0;
-  }
-
-  .profile__picture-container {
-    margin-right: 0px;
-    margin-left: 12px;
   }
 
   .profile__info {
