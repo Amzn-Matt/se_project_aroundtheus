@@ -59,6 +59,7 @@ api
   .getUserInfo()
   .then((userData) => {
     userInfo.setUserInfo(userData);
+    userInfo.setUserAvatar(userData.avatar);
   })
   .catch((err) => {
     console.log(err);
@@ -99,6 +100,7 @@ function openAddNewCardModal() {
 }
 
 function handleProfileFormSubmit(inputValues) {
+  profileEditPopup.renderLoading(true);
   api
     .editProfileInfo(inputValues)
     .then(() => {
@@ -107,22 +109,30 @@ function handleProfileFormSubmit(inputValues) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      profileEditPopup.renderLoading(false);
     });
 }
 
 function handleNewAvatarSubmit(inputvalues) {
+  avatarEditPopup.renderLoading(true);
   api
     .updateProfilePicture(inputvalues)
-    .then(() => {
-      userInfo.setUserAvatar(inputvalues);
+    .then(({ avatar }) => {
+      userInfo.setUserAvatar(avatar);
       avatarEditPopup.close();
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      avatarEditPopup.renderLoading(false);
     });
 }
 
 function handleNewCardSubmit({ name, link }) {
+  addCardPopup.renderLoading(true);
   api
     .addNewCard({ name, link })
     .then((data) => {
@@ -132,6 +142,9 @@ function handleNewCardSubmit({ name, link }) {
     })
     .catch((err) => {
       console.log(err);
+    })
+    .finally(() => {
+      addCardPopup.renderLoading(false);
     });
 }
 
@@ -151,11 +164,11 @@ function handleCardClick(data) {
 }
 
 function handleCardLike(cardId) {
-  if (this.isLiked === true) {
+  if (this.isLiked) {
     api
       .removeCardLike(cardId)
-      .then(() => {
-        this.toggleLikes();
+      .then((card) => {
+        this.toggleLikes(card.isLiked);
       })
       .catch((err) => {
         console.log(err);
@@ -163,8 +176,8 @@ function handleCardLike(cardId) {
   } else {
     api
       .addCardLike(cardId)
-      .then(() => {
-        this.toggleLikes();
+      .then((card) => {
+        this.toggleLikes(card.isLiked);
       })
       .catch((err) => {
         console.log(err);
