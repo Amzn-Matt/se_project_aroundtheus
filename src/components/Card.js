@@ -8,7 +8,7 @@ export default class Card {
   ) {
     this._name = name;
     this._link = link;
-    this._isLiked = isLiked;
+    this.isLiked = isLiked;
     this._cardId = _id;
     this._owner = owner._id;
     this._cardSelector = cardSelector;
@@ -32,12 +32,12 @@ export default class Card {
   }
 
   toggleLikes(isLiked) {
-    this._isLiked = isLiked;
+    this.isLiked = isLiked;
     this._renderLikes();
   }
 
   _renderLikes() {
-    if (this._isLiked === true) {
+    if (this.isLiked) {
       this._likeButton.classList.add("card__like-button_active");
     } else {
       this._likeButton.classList.remove("card__like-button_active");
@@ -66,6 +66,7 @@ export default class Card {
     this._cardImageElement.alt = this._link;
 
     this._setEventListeners();
+    this._renderLikes();
 
     return this._cardElement;
   }
