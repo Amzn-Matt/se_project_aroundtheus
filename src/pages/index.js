@@ -6,7 +6,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import Api from "../components/Api.js";
-import PopupWithDeleteCard from "../components/PopupWithConfirmation.js";
 import {
   profileEditBtn,
   avatarEditBtn,
