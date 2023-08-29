@@ -6,7 +6,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
 import "../pages/index.css";
 import Api from "../components/Api.js";
-import PopupWithDeleteCard from "../components/PopupWithDeleteCard.js";
+import PopupWithDeleteCard from "../components/PopupWithConfirmation.js";
 import {
   profileEditBtn,
   avatarEditBtn,
@@ -16,6 +16,7 @@ import {
   cardListElement,
   config,
 } from "../utils/constants.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 
 let section;
 
@@ -67,18 +68,31 @@ api
 
 const profileEditPopup = new PopupWithForm(
   "#edit-modal",
-  handleProfileFormSubmit
+  handleProfileFormSubmit,
+  "Save",
+  "Saving..."
 );
 
 const avatarEditPopup = new PopupWithForm(
   "#avatar-modal",
-  handleNewAvatarSubmit
+  handleNewAvatarSubmit,
+  "Save",
+  "Saving..."
 );
 
 //Card Forms
-const addCardPopup = new PopupWithForm("#add-modal", handleNewCardSubmit);
+const addCardPopup = new PopupWithForm(
+  "#add-modal",
+  handleNewCardSubmit,
+  "Create",
+  "Creating..."
+);
 const cardPreviewPopup = new PopupWithImage("#preview-modal");
-const deleteCardPopup = new PopupWithDeleteCard("#delete-card-modal");
+const deleteCardPopup = new PopupWithConfirmation(
+  "#delete-card-modal",
+  "Yes",
+  "Deleting..."
+);
 
 //Functions
 function openEditProfileForm() {
@@ -168,7 +182,7 @@ function handleCardLike(cardId) {
     api
       .removeCardLike(cardId)
       .then((card) => {
-        this.toggleLikes(card.isLiked);
+        this.setLikes(card.isLiked);
       })
       .catch((err) => {
         console.log(err);
@@ -177,7 +191,7 @@ function handleCardLike(cardId) {
     api
       .addCardLike(cardId)
       .then((card) => {
-        this.toggleLikes(card.isLiked);
+        this.setLikes(card.isLiked);
       })
       .catch((err) => {
         console.log(err);
@@ -188,6 +202,7 @@ function handleCardLike(cardId) {
 function handleDeleteBtnClick(cardId) {
   deleteCardPopup.open();
   deleteCardPopup.setSubmitAction(() => {
+    deleteCardPopup.renderLoading(true);
     api
       .deleteCard(cardId)
       .then((res) => {
@@ -196,6 +211,9 @@ function handleDeleteBtnClick(cardId) {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        deleteCardPopup.renderLoading(false);
       });
   });
 }
