@@ -31,7 +31,7 @@ export default class Card {
     });
   }
 
-  toggleLikes(isLiked) {
+  setLikes(isLiked) {
     this.isLiked = isLiked;
     this._renderLikes();
   }
