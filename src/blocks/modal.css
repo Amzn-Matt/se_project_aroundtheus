@@ -31,6 +31,18 @@
   padding: 34px 36px 36px;
 }
 
+.modal__delete-container {
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-sizing: border-box;
+  max-width: 430px;
+  width: 100%;
+  min-height: 181px;
+  padding: 34px 36px 36px;
+}
+
 .modal__close {
   position: absolute;
   top: -40px;
@@ -157,6 +169,12 @@
   .modal__container {
     max-width: 282px;
     min-height: 322px;
+    padding: 25px 22px 25px 22px;
+  }
+
+  .modal__delete-container {
+    max-width: 282px;
+    min-height: 160px;
     padding: 25px 22px 25px 22px;
   }
 
